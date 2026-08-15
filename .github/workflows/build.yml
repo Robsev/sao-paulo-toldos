@@ -1,0 +1,39 @@
+name: Build do site (Astro)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Descompactar código fonte
+        run: |
+          unzip -o sao-paulo-toldos.zip -d _src
+          mv _src/sao-paulo-toldos site
+          rm -rf _src
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependências
+        working-directory: site
+        run: npm ci
+
+      - name: Build do site
+        working-directory: site
+        run: npm run build
+
+      - name: Publicar artefato (dist)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: site/dist
+          retention-days: 14
