@@ -33,6 +33,10 @@ jobs:
       - name: Build do site
         working-directory: site
         run: npm run build
+        env:
+          PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}
+          PUBLIC_META_PIXEL_ID: ${{ secrets.PUBLIC_META_PIXEL_ID }}
+          PUBLIC_SITE_LIVE: ${{ vars.PUBLIC_SITE_LIVE }}
 
       - name: Publicar artefato (dist)
         uses: actions/upload-artifact@v4
