@@ -1,0 +1,31 @@
+# Configuração do Decap CMS (painel visual em /admin).
+# Antes de usar em produção:
+# 1. Crie um repositório no GitHub para este projeto.
+# 2. Ative o Decap CMS via GitHub OAuth (ou use "Git Gateway" com Netlify Identity
+#    se preferir não expor OAuth próprio).
+# 3. Substitua "SEU-USUARIO/sao-paulo-toldos" abaixo pelo repositório real.
+
+backend:
+  name: github
+  repo: SEU-USUARIO/sao-paulo-toldos
+  branch: main
+
+media_folder: 'public/images/produtos'
+public_folder: '/images/produtos'
+
+collections:
+  - name: 'produtos'
+    label: 'Produtos'
+    folder: 'src/content/produtos'
+    create: true
+    identifier_field: nome
+    extension: json
+    format: json
+    fields:
+      - { label: 'Nome', name: 'nome', widget: 'string' }
+      - { label: 'Slug (URL)', name: 'slug', widget: 'string' }
+      - { label: 'Resumo', name: 'resumo', widget: 'string' }
+      - { label: 'Descrição completa', name: 'descricao', widget: 'text' }
+      - { label: 'Imagem de capa', name: 'imagemCapa', widget: 'image' }
+      - { label: 'Galeria de fotos', name: 'galeria', widget: 'list', field: { label: 'Foto', name: 'foto', widget: 'image' } }
+      - { label: 'Ordem de exibição', name: 'ordem', widget: 'number', default: 0 }

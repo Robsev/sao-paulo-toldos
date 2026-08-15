@@ -1,0 +1,10 @@
+# Este robots.txt fica em /sitenovo/robots.txt enquanto o site está em
+# avaliação numa subpasta — ele só passa a valer para os buscadores quando
+# este projeto for publicado na RAIZ do domínio (substituindo o site atual).
+# Até lá, as páginas também trazem a tag <meta name="robots" content="noindex">
+# para evitar indexação duplicada com o site em produção.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.saopaulotoldos.com.br/sitemap.xml
