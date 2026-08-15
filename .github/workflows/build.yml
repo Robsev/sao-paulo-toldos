@@ -37,3 +37,14 @@ jobs:
           name: dist
           path: site/dist
           retention-days: 14
+
+      - name: Deploy via rsync/SSH
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete
+          path: site/dist/
+          remote_path: ${{ secrets.VPS_TARGET_DIR }}
+          remote_host: ${{ secrets.VPS_HOST }}
+          remote_port: ${{ secrets.VPS_PORT }}
+          remote_user: ${{ secrets.VPS_USER }}
+          remote_key: ${{ secrets.VPS_SSH_KEY }}
